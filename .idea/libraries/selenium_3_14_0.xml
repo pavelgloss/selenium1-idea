@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="selenium-3.14.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/selenium-3.14.0/selenium-api-3.14.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/selenium-3.14.0/selenium-chrome-driver-3.14.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/selenium-3.14.0/selenium-edge-driver-3.14.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/selenium-3.14.0/selenium-firefox-driver-3.14.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/selenium-3.14.0/selenium-ie-driver-3.14.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/selenium-3.14.0/selenium-opera-driver-3.14.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/selenium-3.14.0/selenium-remote-driver-3.14.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/selenium-3.14.0/selenium-safari-driver-3.14.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/selenium-3.14.0/selenium-support-3.14.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ideaLibSources/selenium-opera-driver-3.14.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.ideaLibSources/selenium-api-3.14.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.ideaLibSources/selenium-support-3.14.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
