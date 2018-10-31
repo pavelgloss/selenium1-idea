@@ -59,7 +59,7 @@ public class SeleniumLectorTest {
     @Test
     public void testGoogleSearch() {
         driver.get("http://www.google.com");
-        WebElement searchInput = driver.findElement(By.cssSelector("#lst-ib"));
+        WebElement searchInput = driver.findElement(By.id("lst-ib"));
         searchInput.sendKeys("selenium tutorial");
         searchInput.sendKeys(Keys.RETURN);
     }
@@ -70,14 +70,17 @@ public class SeleniumLectorTest {
 
         driver.get("http://digitalnizena.cz/church/");
 
-        driver.findElement(By.cssSelector(".login-box"));
+        driver.findElement(By.cssSelector("#Login"));   // test crash if container not found
 
         WebElement usernameInput = driver.findElement(By.id("UserBox"));
+
+        // finding element by value of attribute name
+        // WebElement usernameInput = driver.findElement(By.name("User"));
+
         WebElement passwordInput = driver.findElement(By.id("PasswordBox"));
-        WebElement loginButton = driver.findElement(By.className("btn-primary"));
+        WebElement loginButton = driver.findElement(By.cssSelector("form button.btn-primary"));
 
         usernameInput.sendKeys("church");
-        //passwordInput.sendKeys("#V%q1@Fmdr");
         passwordInput.sendKeys("church12345");
         loginButton.click();
 
@@ -114,7 +117,7 @@ public class SeleniumLectorTest {
         driver.get("http://digitalnizena.cz/church/notExistingPage");
 
         String cookieName = "CRM%40%2Fchurch";
-        String cookieValue = "5u3i4i9q2ilgbn742f38sksd84";
+        String cookieValue = "jetls5dvph11kartv0jnh2iia5";
         String cookieDomain = "digitalnizena.cz";
         String cookiePath = "/";
         Date cookieExpiry = null;
@@ -131,13 +134,13 @@ public class SeleniumLectorTest {
         loginUsingValidCredentials();
 
         WebElement depositTreeViewItem = driver.findElement(By.cssSelector("aside.main-sidebar .sidebar ul.sidebar-menu > li.treeview:nth-child(8) > a"));
-        // compare it with this expression      driver.findElement(By.cssSelector("aside.main-sidebar .sidebar ul.sidebar-menu > li.treeview:nth-child(8) a")).click();
+        // TASK compare it with this expression      driver.findElement(By.cssSelector("aside.main-sidebar .sidebar ul.sidebar-menu > li.treeview:nth-child(8) a")).click();
 
-        // TODO try without expanding tree
         depositTreeViewItem.click();
-
+//
         WebElement viewAllDepositsItem = driver.findElement(By.xpath("/html/body/div[2]/aside[1]/section/ul/li[8]/ul/li[1]/a"));
         viewAllDepositsItem.click();
+        // TODO now try click on "View All Deposits" without expanding tree menu "Deposit"
 
         assertThat(driver.getCurrentUrl()).isEqualTo("http://digitalnizena.cz/church/FindDepositSlip.php");
     }
@@ -164,7 +167,7 @@ public class SeleniumLectorTest {
         WebElement addDepositButton = driver.findElement(By.cssSelector("#addNewDeposit"));
         addDepositButton.click();
 
-        Thread.sleep(2000);       // FIXME   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        Thread.sleep(2000);       // FIXME   task za 5 bludistaku, sleep se NIKDY NIKDY nepouziva, prosim odstrante ho a nahradte lepsi konstrukci
 
         List<WebElement> depositRows = driver.findElements(By.cssSelector("#depositsTable_wrapper #depositsTable tbody tr"));
         WebElement firstRow = depositRows.get(0);
@@ -173,7 +176,7 @@ public class SeleniumLectorTest {
         assertThat(innerHTML).contains(depositComment);
 
 
-        for (WebElement row: depositRows) {
+        for (WebElement row : depositRows) {
             row.click();
         }
 
@@ -186,24 +189,9 @@ public class SeleniumLectorTest {
         wait.until(ExpectedConditions.visibilityOf(confirmDeleteButton));
         confirmDeleteButton.click();
 
-
-
-
-//
-//        for (int i = 0; i < depositRows.size(); i++) {
-//            WebElement row = depositRows.get(i);
-//            String rowHTML = row.getAttribute("innerHTML");
-//        }
-
-        // option0 existuje aspon 1 radek
-        // option1 row innerHTML contains
-        // option2
-        // option3 wrap html fragment into some DOM / XML builder and traverse it
-//            row.findElement(By.cssSelector(""))
-//            row.
-//            driver.findElement(By.cssSelector("#depositsTable_wrapper #depositsTable tbody tr"))
-//            new Table
-//elem.getAttribute("innerHTML");
+        // actually the application behaves incorrect => when delete all rows, Delete button should be disabled
+        // we have our test correct, so it good that test fails!
+        assertThat(deleteButton.isEnabled()).isFalse();
     }
 
 
@@ -219,15 +207,6 @@ public class SeleniumLectorTest {
     public void tearDown() throws Exception {
 
         // driver.quit();
-    }
-
-    public void hokusyPokusy() {
-        //        List<WebElement> elements = driver.findElements(By.cssSelector("login-box"));
-
-        driver.get("http://digitalnizena.cz/church/");
-        WebDriverWait wait = new WebDriverWait(driver, 0);
-//        wait.until(ExpectedConditions.textpresenceOfElementLocated(By.cssSelector(".login-box")));
-        wait.until(ExpectedConditions.urlToBe("http://digitalnizena.cz/church/ddd"));
     }
 
 }
